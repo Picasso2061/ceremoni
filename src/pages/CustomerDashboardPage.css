@@ -1,0 +1,480 @@
+/* ============================================================
+   CustomerDashboardPage — Styles
+   ============================================================ */
+
+/* ── Header ───────────────────────────────────────────────── */
+.dash-header {
+  background: linear-gradient(135deg, var(--color-primary-800), var(--color-primary-700));
+  padding: calc(var(--navbar-height) + var(--space-10)) 0 var(--space-10);
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 80% 50%, rgba(212, 167, 84, 0.1) 0%, transparent 60%);
+}
+
+.dash-header__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.dash-header__title {
+  font-size: var(--fs-2xl);
+  color: var(--text-inverse);
+  margin-bottom: var(--space-1);
+}
+
+.dash-header__subtitle {
+  font-size: var(--fs-md);
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ── Body ─────────────────────────────────────────────────── */
+.dash-body {
+  padding: var(--space-8) 0 var(--space-20);
+}
+
+/* ── Stats ────────────────────────────────────────────────── */
+.dash-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+  margin-top: calc(-1 * var(--space-10));
+  position: relative;
+  z-index: 1;
+}
+
+.dash-stat-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  background: var(--bg-primary);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.dash-stat-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dash-stat-card__icon--purple {
+  background: var(--color-primary-50);
+  color: var(--color-primary-700);
+}
+
+.dash-stat-card__icon--gold {
+  background: var(--color-accent-50);
+  color: var(--color-accent-600);
+}
+
+.dash-stat-card__icon--green {
+  background: #e8f5ee;
+  color: var(--color-success);
+}
+
+.dash-stat-card__icon--blue {
+  background: #e8f0fe;
+  color: var(--color-info);
+}
+
+.dash-stat-card__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-stat-card__value {
+  font-family: var(--font-heading);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.dash-stat-card__label {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  font-weight: var(--fw-medium);
+}
+
+/* ── Grid Layout ──────────────────────────────────────────── */
+.dash-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+/* ── Cards ────────────────────────────────────────────────── */
+.dash-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.dash-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+}
+
+.dash-card__header h2 {
+  font-size: var(--fs-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-primary-800);
+}
+
+.dash-card__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--fs-sm);
+  color: var(--color-primary-600);
+  font-weight: var(--fw-medium);
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.dash-card__link:hover {
+  color: var(--color-primary-800);
+}
+
+/* ── Event Info ───────────────────────────────────────────── */
+.dash-event-info {
+  margin-bottom: var(--space-6);
+}
+
+.dash-event-info__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-neutral-100);
+}
+
+.dash-event-info__row:last-child {
+  border-bottom: none;
+}
+
+.dash-event-info__label {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+.dash-event-info__value {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+
+/* ── Budget ───────────────────────────────────────────────── */
+.dash-budget {
+  padding: var(--space-5);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+}
+
+.dash-budget__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.dash-budget__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.dash-budget__amounts {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+.dash-budget__bar {
+  height: 8px;
+  background: var(--color-neutral-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-3);
+}
+
+.dash-budget__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent-400), var(--color-accent-500));
+  border-radius: var(--radius-full);
+  width: var(--progress, 0%);
+  animation: progressBar var(--duration-slower) var(--ease-out) both;
+}
+
+.dash-budget__footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dash-budget__remaining {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+.dash-budget__percent {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-success);
+}
+
+.dash-budget__percent--warning {
+  color: var(--color-warning);
+}
+
+/* ── Bookings List ────────────────────────────────────────── */
+.dash-bookings-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-booking-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.dash-booking-item:hover {
+  background: var(--bg-secondary);
+}
+
+.dash-booking-item__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  flex-shrink: 0;
+}
+
+.dash-booking-item__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dash-booking-item__name {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+}
+
+.dash-booking-item__detail {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dash-booking-item__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+  flex-shrink: 0;
+}
+
+.dash-booking-item__price {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-primary-700);
+}
+
+/* ── Checklist ────────────────────────────────────────────── */
+.dash-checklist-progress {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-primary-600);
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-primary-50);
+  border-radius: var(--radius-full);
+}
+
+.dash-checklist-bar {
+  height: 4px;
+  background: var(--color-neutral-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-5);
+}
+
+.dash-checklist-bar__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-success), #4ade80);
+  border-radius: var(--radius-full);
+  width: var(--progress, 0%);
+  animation: progressBar var(--duration-slower) var(--ease-out) both;
+}
+
+.dash-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.dash-checklist__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.dash-checklist__item:hover {
+  background: var(--bg-secondary);
+}
+
+.dash-checklist__item--done {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.dash-checklist__check {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-neutral-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dash-checklist__item--done .dash-checklist__check {
+  border-color: var(--color-success);
+  background: var(--color-success);
+  color: white;
+}
+
+/* ── Favorites ────────────────────────────────────────────── */
+.dash-favorites-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-fav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.dash-fav-item:hover {
+  background: var(--bg-secondary);
+}
+
+.dash-fav-item__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.9);
+  flex-shrink: 0;
+}
+
+.dash-fav-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.dash-fav-item__name {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+
+.dash-fav-item__cat {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+.dash-fav-item__arrow {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.dash-empty-fav {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  text-align: center;
+  padding: var(--space-4);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .dash-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dash-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+  }
+
+  .dash-stat-card {
+    padding: var(--space-4);
+  }
+
+  .dash-stat-card__value {
+    font-size: var(--fs-xl);
+  }
+
+  .dash-header__content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .dash-stats {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,499 @@
+/* ============================================================
+   VendorRegisterPage — Styles
+   ============================================================ */
+
+/* ── Header ───────────────────────────────────────────────── */
+.vrp-header {
+  background: linear-gradient(135deg, var(--color-primary-800), var(--color-primary-700));
+  padding: calc(var(--navbar-height) + var(--space-12)) 0 var(--space-12);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.vrp-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 70% 30%, rgba(212, 167, 84, 0.12) 0%, transparent 60%);
+}
+
+.vrp-header__title {
+  font-size: var(--fs-3xl);
+  color: var(--text-inverse);
+  margin-bottom: var(--space-3);
+  position: relative;
+}
+
+.vrp-header__subtitle {
+  font-size: var(--fs-md);
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+}
+
+/* ── Body ─────────────────────────────────────────────────── */
+.vrp-body {
+  padding: var(--space-10) 0 var(--space-20);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ── Step Indicator ───────────────────────────────────────── */
+.vrp-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: var(--space-10);
+  flex-wrap: wrap;
+}
+
+.vrp-step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  position: relative;
+}
+
+.vrp-step__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-neutral-300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  background: var(--bg-primary);
+  transition: all var(--duration-base) var(--ease-out);
+  flex-shrink: 0;
+}
+
+.vrp-step__label {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  color: var(--text-muted);
+  white-space: nowrap;
+  transition: color var(--duration-base) var(--ease-out);
+}
+
+.vrp-step__connector {
+  width: 40px;
+  height: 2px;
+  background: var(--color-neutral-200);
+  margin: 0 var(--space-2);
+  flex-shrink: 0;
+  transition: background var(--duration-base) var(--ease-out);
+}
+
+.vrp-step--active .vrp-step__icon {
+  border-color: var(--color-primary-700);
+  background: var(--color-primary-700);
+  color: var(--text-inverse);
+  box-shadow: 0 0 0 4px var(--color-primary-50);
+}
+
+.vrp-step--active .vrp-step__label {
+  color: var(--color-primary-700);
+  font-weight: var(--fw-semibold);
+}
+
+.vrp-step--done .vrp-step__icon {
+  border-color: var(--color-success);
+  background: var(--color-success);
+  color: var(--text-inverse);
+}
+
+.vrp-step--done .vrp-step__label {
+  color: var(--color-success);
+}
+
+.vrp-step--done .vrp-step__connector {
+  background: var(--color-success);
+}
+
+/* ── Form Card ────────────────────────────────────────────── */
+.vrp-form-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-10);
+  box-shadow: var(--shadow-md);
+}
+
+.vrp-form-step h2 {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-2);
+  color: var(--color-primary-800);
+}
+
+.vrp-form-step__desc {
+  color: var(--text-secondary);
+  margin-bottom: var(--space-8);
+}
+
+.vrp-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+
+.vrp-full-width {
+  grid-column: 1 / -1;
+}
+
+.form-input--error,
+.form-select.form-input--error {
+  border-color: var(--color-error);
+}
+
+.form-input--error:focus {
+  box-shadow: 0 0 0 4px rgba(196, 75, 75, 0.1);
+}
+
+/* ── Services List ────────────────────────────────────────── */
+.vrp-services-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.vrp-service-row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.vrp-service-price {
+  max-width: 160px;
+}
+
+.vrp-service-remove {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.vrp-service-remove:hover {
+  color: var(--color-error);
+  background: rgba(196, 75, 75, 0.1);
+}
+
+.vrp-add-service {
+  margin-top: var(--space-2);
+}
+
+/* ── Upload Zone ──────────────────────────────────────────── */
+.vrp-upload-zone {
+  border: 2px dashed var(--color-neutral-300);
+  border-radius: var(--radius-lg);
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+  color: var(--text-muted);
+  transition: all var(--duration-base) var(--ease-out);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.vrp-upload-zone:hover {
+  border-color: var(--color-primary-300);
+  background: var(--color-primary-50);
+}
+
+.vrp-upload-zone h3 {
+  font-size: var(--fs-md);
+  color: var(--text-primary);
+}
+
+.vrp-upload-zone p {
+  font-size: var(--fs-sm);
+}
+
+.vrp-upload-note {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+.vrp-upload-zone--small {
+  padding: var(--space-8) var(--space-6);
+}
+
+.vrp-upload-btn {
+  margin-top: var(--space-2);
+}
+
+.vrp-upload-preview {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+}
+
+.vrp-upload-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-sm);
+  background: var(--color-neutral-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: scaleIn var(--duration-base) var(--ease-spring) both;
+}
+
+.vrp-upload-thumb__placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--color-primary-100), var(--color-accent-100));
+}
+
+.vrp-upload-thumb svg {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  background: var(--color-success);
+  color: white;
+  border-radius: var(--radius-full);
+  padding: 3px;
+}
+
+.vrp-upload-status {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  margin-top: var(--space-4);
+}
+
+/* ── Verification Note ────────────────────────────────────── */
+.vrp-verify-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-primary-50);
+  border-radius: var(--radius-md);
+  margin-top: var(--space-6);
+  font-size: var(--fs-sm);
+  color: var(--color-primary-700);
+}
+
+.vrp-verify-note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── Review Section ───────────────────────────────────────── */
+.vrp-review-section {
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-neutral-200);
+}
+
+.vrp-review-section:last-of-type {
+  border-bottom: none;
+}
+
+.vrp-review-section h3 {
+  font-size: var(--fs-md);
+  margin-bottom: var(--space-3);
+  color: var(--color-primary-800);
+  font-family: var(--font-body);
+  font-weight: var(--fw-semibold);
+}
+
+.vrp-review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.vrp-review-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.vrp-review-label {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.vrp-review-value {
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+  font-weight: var(--fw-medium);
+}
+
+.vrp-review-service {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+/* ── Terms ────────────────────────────────────────────────── */
+.vrp-terms-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.vrp-terms-check input[type="checkbox"] {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary-700);
+  flex-shrink: 0;
+}
+
+.vrp-terms-check a {
+  color: var(--color-primary-600);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Form Navigation ──────────────────────────────────────── */
+.vrp-form-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-10);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-neutral-200);
+}
+
+.vrp-form-nav .btn:only-child {
+  margin-left: auto;
+}
+
+/* ── Success State ────────────────────────────────────────── */
+.vrp-success {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--navbar-height) var(--space-6) var(--space-12);
+}
+
+.vrp-success__card {
+  text-align: center;
+  max-width: 500px;
+  padding: var(--space-12);
+  background: var(--bg-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+}
+
+.vrp-success__checkmark {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--space-6);
+}
+
+.vrp-success__svg {
+  width: 100%;
+  height: 100%;
+}
+
+.vrp-success__circle {
+  stroke: var(--color-success);
+  stroke-width: 2;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: vrpCircle 0.6s var(--ease-out) forwards;
+}
+
+.vrp-success__check {
+  stroke: var(--color-success);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: vrpCheck 0.3s var(--ease-out) 0.5s forwards;
+}
+
+@keyframes vrpCircle {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes vrpCheck {
+  to { stroke-dashoffset: 0; }
+}
+
+.vrp-success__card h2 {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-4);
+  color: var(--color-primary-800);
+}
+
+.vrp-success__card p {
+  color: var(--text-secondary);
+  line-height: var(--lh-loose);
+  margin-bottom: var(--space-6);
+}
+
+.vrp-success__ref {
+  padding: var(--space-3) var(--space-5);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+.vrp-success__ref strong {
+  color: var(--color-primary-700);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .vrp-form-card {
+    padding: var(--space-6);
+  }
+
+  .vrp-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vrp-review-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vrp-steps {
+    gap: var(--space-1);
+  }
+
+  .vrp-step__label {
+    display: none;
+  }
+
+  .vrp-step__connector {
+    width: 24px;
+  }
+
+  .vrp-service-row {
+    flex-wrap: wrap;
+  }
+
+  .vrp-service-price {
+    max-width: 100%;
+  }
+}

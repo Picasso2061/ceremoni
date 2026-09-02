@@ -1,0 +1,254 @@
+/* ============================================================
+   BookingPage — Styles
+   ============================================================ */
+
+/* ── Header ───────────────────────────────────────────────── */
+.bp-header {
+  background: linear-gradient(135deg, var(--color-primary-800), var(--color-primary-700));
+  padding: calc(var(--navbar-height) + var(--space-8)) 0 var(--space-8);
+  position: relative;
+}
+
+.bp-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 40% 60%, rgba(212, 167, 84, 0.1) 0%, transparent 60%);
+}
+
+.bp-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: var(--space-4);
+  position: relative;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.bp-back:hover {
+  color: var(--text-inverse);
+}
+
+.bp-header__title {
+  font-size: var(--fs-3xl);
+  color: var(--text-inverse);
+  position: relative;
+}
+
+/* ── Body ─────────────────────────────────────────────────── */
+.bp-body {
+  padding: var(--space-8) 0 var(--space-20);
+}
+
+.bp-layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+/* ── Form ─────────────────────────────────────────────────── */
+.bp-form {
+  background: var(--bg-primary);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+}
+
+.bp-form-section {
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid var(--color-neutral-100);
+}
+
+.bp-form-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: var(--space-2);
+  padding-bottom: 0;
+}
+
+.bp-form-section h2 {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-5);
+  color: var(--color-primary-800);
+}
+
+.bp-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+}
+
+.bp-full-width {
+  grid-column: 1 / -1;
+}
+
+.bp-submit-btn {
+  width: 100%;
+  margin-top: var(--space-4);
+}
+
+/* ── Vendor Summary Sidebar ───────────────────────────────── */
+.bp-sidebar {
+  position: sticky;
+  top: calc(var(--navbar-height) + var(--space-4));
+}
+
+.bp-vendor-summary {
+  overflow: hidden;
+}
+
+.bp-vendor-summary__header {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.bp-vendor-summary__body {
+  padding: var(--space-5);
+}
+
+.bp-vendor-summary__badges {
+  display: flex;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.bp-vendor-summary__name {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-2);
+  color: var(--color-primary-800);
+}
+
+.bp-vendor-summary__meta {
+  display: flex;
+  gap: var(--space-4);
+  margin-bottom: var(--space-3);
+}
+
+.bp-vendor-summary__meta span {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+
+.bp-vendor-summary__rating {
+  margin-bottom: var(--space-4);
+}
+
+.bp-vendor-summary__divider {
+  height: 1px;
+  background: var(--color-neutral-200);
+  margin: var(--space-4) 0;
+}
+
+.bp-vendor-summary__body h4 {
+  font-size: var(--fs-sm);
+  font-family: var(--font-body);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--space-3);
+  color: var(--text-primary);
+}
+
+.bp-vendor-summary__services {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.bp-vendor-summary__services li {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  gap: var(--space-3);
+}
+
+.bp-vendor-summary__price {
+  font-weight: var(--fw-semibold);
+  color: var(--color-primary-700);
+  white-space: nowrap;
+}
+
+/* ── Success State ────────────────────────────────────────── */
+.bp-success {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--navbar-height) var(--space-6) var(--space-12);
+}
+
+.bp-success__card {
+  text-align: center;
+  max-width: 500px;
+  padding: var(--space-12);
+  background: var(--bg-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+}
+
+.bp-success__icon {
+  color: var(--color-success);
+  margin-bottom: var(--space-5);
+  animation: scaleIn var(--duration-slow) var(--ease-spring) both;
+}
+
+.bp-success__card h2 {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-4);
+  color: var(--color-primary-800);
+}
+
+.bp-success__card p {
+  color: var(--text-secondary);
+  line-height: var(--lh-loose);
+  margin-bottom: var(--space-8);
+}
+
+.bp-success__actions {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Not Found ────────────────────────────────────────────── */
+.bp-not-found {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: var(--navbar-height);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .bp-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .bp-sidebar {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .bp-form {
+    padding: var(--space-5);
+  }
+
+  .bp-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
