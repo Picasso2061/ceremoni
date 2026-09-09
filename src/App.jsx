@@ -7,6 +7,7 @@ import VendorProfilePage from './pages/VendorProfilePage';
 import VendorRegisterPage from './pages/VendorRegisterPage';
 import CustomerDashboardPage from './pages/CustomerDashboardPage';
 import BookingPage from './pages/BookingPage';
+import VendorDashboardPage from './pages/VendorDashboardPage';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
             <Route path="/vendors/:id" element={<VendorProfilePage />} />
             <Route path="/register" element={<VendorRegisterPage />} />
             <Route path="/dashboard" element={<CustomerDashboardPage />} />
+            <Route path="/vendor-dashboard" element={<VendorDashboardPage />} />
             <Route path="/booking/:vendorId" element={<BookingPage />} />
           </Route>
         </Routes>

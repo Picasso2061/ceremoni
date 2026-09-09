@@ -1,23 +1,27 @@
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import {
   MapPin, ShieldCheck, Clock, Phone, Mail, Globe2,
   Link2, Globe, ArrowLeft, Heart, Share2, Calendar,
-  Star as StarIcon, ChevronRight, MessageSquare
+  Star as StarIcon, ChevronRight, MessageSquare, PenLine
 } from 'lucide-react';
 import StarRating from '../components/StarRating';
 import ReviewCard from '../components/ReviewCard';
 import Badge from '../components/Badge';
+import ReviewModal from '../components/ReviewModal';
+import AvailabilityCalendar from '../components/AvailabilityCalendar';
 import { useApp } from '../context/AppContext';
 import vendors from '../data/vendors';
-import reviews from '../data/reviews';
 import categories from '../data/categories';
 import './VendorProfilePage.css';
 
 export default function VendorProfilePage() {
   const { id } = useParams();
   const { state, dispatch } = useApp();
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState('');
   const vendor = vendors.find(v => v.id === id);
-  const vendorReviews = reviews.filter(r => r.vendorId === id);
+  const vendorReviews = state.reviews.filter(r => r.vendorId === id);
   const cat = categories.find(c => c.id === vendor?.category);
   const CatIcon = cat?.icon;
   const isFav = state.favorites.includes(id);
@@ -153,10 +157,16 @@ export default function VendorProfilePage() {
 
             {/* Reviews */}
             <section className="vpp-section animate-fade-in-up" id="vendor-reviews">
-              <h2 className="vpp-section__title">
-                Reviews
-                <span className="vpp-section__count">({vendorReviews.length})</span>
-              </h2>
+              <div className="vpp-section__header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-5)' }}>
+                <h2 className="vpp-section__title" style={{ marginBottom: 0 }}>
+                  Reviews
+                  <span className="vpp-section__count">({vendorReviews.length})</span>
+                </h2>
+                <button className="btn btn-outline btn-sm" onClick={() => setIsReviewModalOpen(true)}>
+                  <PenLine size={16} />
+                  Write a Review
+                </button>
+              </div>
 
               {/* Rating Summary */}
               <div className="vpp-rating-summary">
@@ -200,8 +210,14 @@ export default function VendorProfilePage() {
               <p className="vpp-booking-card__price">
                 Starting from <strong>{vendor.services[0]?.price}</strong>
               </p>
+              
+              <div className="vpp-booking-calendar" style={{ marginBottom: 'var(--space-5)' }}>
+                <h4 style={{ fontSize: 'var(--fs-sm)', marginBottom: 'var(--space-2)', color: 'var(--color-primary-800)' }}>Check Availability</h4>
+                <AvailabilityCalendar bookedDates={vendor.bookedDates} onSelectDate={setSelectedDate} />
+              </div>
+
               <Link
-                to={`/booking/${vendor.id}`}
+                to={`/booking/${vendor.id}${selectedDate ? `?date=${selectedDate}` : ''}`}
                 className="btn btn-accent btn-lg vpp-booking-card__btn"
                 id="book-vendor-btn"
               >
@@ -251,6 +267,12 @@ export default function VendorProfilePage() {
           </aside>
         </div>
       </div>
+
+      <ReviewModal
+        isOpen={isReviewModalOpen}
+        onClose={() => setIsReviewModalOpen(false)}
+        vendorId={vendor.id}
+      />
     </div>
   );
 }

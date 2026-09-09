@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { MapPin, ShieldCheck, Heart } from 'lucide-react';
+import { MapPin, ShieldCheck, Heart, GitCompareArrows } from 'lucide-react';
 import StarRating from './StarRating';
 import Badge from './Badge';
 import { useApp } from '../context/AppContext';
@@ -9,6 +9,8 @@ import './VendorCard.css';
 export default function VendorCard({ vendor }) {
   const { state, dispatch } = useApp();
   const isFav = state.favorites.includes(vendor.id);
+  const isCompared = state.compareList.includes(vendor.id);
+  const compareFull = state.compareList.length >= 3;
   const cat = categories.find(c => c.id === vendor.category);
   const CatIcon = cat?.icon;
 
@@ -37,17 +39,35 @@ export default function VendorCard({ vendor }) {
             <span className="vendor-card__category-name">{cat?.name}</span>
           </div>
         )}
-        <button
-          className={`vendor-card__fav ${isFav ? 'vendor-card__fav--active' : ''}`}
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            dispatch({ type: 'TOGGLE_FAVORITE', payload: vendor.id });
-          }}
-          aria-label={isFav ? 'Remove from favorites' : 'Add to favorites'}
-        >
-          <Heart size={18} fill={isFav ? 'currentColor' : 'none'} />
-        </button>
+        <div className="vendor-card__top-actions">
+          <button
+            className={`vendor-card__fav ${isFav ? 'vendor-card__fav--active' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              dispatch({ type: 'TOGGLE_FAVORITE', payload: vendor.id });
+            }}
+            aria-label={isFav ? 'Remove from favorites' : 'Add to favorites'}
+          >
+            <Heart size={18} fill={isFav ? 'currentColor' : 'none'} />
+          </button>
+          <button
+            className={`vendor-card__compare ${isCompared ? 'vendor-card__compare--active' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (isCompared) {
+                dispatch({ type: 'REMOVE_FROM_COMPARE', payload: vendor.id });
+              } else if (!compareFull) {
+                dispatch({ type: 'ADD_TO_COMPARE', payload: vendor.id });
+              }
+            }}
+            disabled={!isCompared && compareFull}
+            aria-label={isCompared ? 'Remove from comparison' : 'Add to comparison'}
+          >
+            <GitCompareArrows size={16} />
+          </button>
+        </div>
         {vendor.verified && (
           <div className="vendor-card__verified-badge">
             <ShieldCheck size={14} />

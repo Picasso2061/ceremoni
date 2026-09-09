@@ -1,0 +1,110 @@
+/* ============================================================
+   ReviewModal — Styles
+   ============================================================ */
+
+.review-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.review-modal-content {
+  background: var(--bg-primary);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 500px;
+  padding: var(--space-8);
+  position: relative;
+  box-shadow: var(--shadow-2xl);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.review-modal-close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.review-modal-close:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.review-modal-title {
+  font-size: var(--fs-xl);
+  color: var(--color-primary-800);
+  margin-bottom: var(--space-1);
+}
+
+.review-modal-subtitle {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+.review-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.review-modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.review-modal-field label {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+
+.review-modal-stars {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.review-modal-star {
+  color: var(--color-neutral-300);
+  transition: color var(--duration-fast) var(--ease-out);
+  cursor: pointer;
+}
+
+.review-modal-star--active {
+  color: var(--color-accent-500);
+}
+
+.review-modal-star:hover {
+  transform: scale(1.1);
+}
+
+.review-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .review-modal-content {
+    padding: var(--space-6);
+  }
+}

@@ -1,0 +1,213 @@
+/* ============================================================
+   EventTimeline — Styles
+   ============================================================ */
+
+.event-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ── Countdown ───────────────────────────────────────────── */
+.timeline-countdown {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-5);
+  background: linear-gradient(135deg, var(--color-primary-50), var(--color-accent-50));
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-primary-100);
+}
+
+.timeline-countdown__ring {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+}
+
+.timeline-countdown__svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.timeline-countdown__track {
+  fill: none;
+  stroke: var(--color-neutral-200);
+  stroke-width: 6;
+}
+
+.timeline-countdown__fill {
+  fill: none;
+  stroke: var(--color-accent-500);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 264;
+  stroke-dashoffset: calc(264 - var(--progress, 0));
+  transition: stroke-dashoffset 1.5s var(--ease-out);
+}
+
+.timeline-countdown__center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-countdown__number {
+  font-family: var(--font-heading);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--color-primary-800);
+  line-height: 1;
+}
+
+.timeline-countdown__unit {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  font-weight: var(--fw-medium);
+}
+
+.timeline-countdown__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.timeline-countdown__weeks {
+  font-family: var(--font-heading);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--color-primary-700);
+}
+
+.timeline-countdown__date {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+/* ── Timeline Track ──────────────────────────────────────── */
+.timeline-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--space-5);
+}
+
+.timeline-track::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-neutral-200);
+}
+
+/* ── Milestone ───────────────────────────────────────────── */
+.timeline-milestone {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  position: relative;
+}
+
+.timeline-milestone__marker {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--bg-primary);
+  color: var(--color-neutral-300);
+  position: relative;
+  z-index: 1;
+  margin-left: -4px;
+}
+
+.timeline-milestone--done .timeline-milestone__marker {
+  color: var(--color-success);
+}
+
+.timeline-milestone--current .timeline-milestone__marker {
+  color: var(--color-accent-500);
+}
+
+.timeline-milestone__pulse {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-500);
+  animation: pulse 2s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(212, 167, 84, 0.4);
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 167, 84, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(212, 167, 84, 0); }
+}
+
+.timeline-milestone__content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  min-height: 28px;
+}
+
+.timeline-milestone__icon {
+  font-size: var(--fs-base);
+}
+
+.timeline-milestone__label {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+}
+
+.timeline-milestone--done .timeline-milestone__label {
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.timeline-milestone--current .timeline-milestone__label {
+  color: var(--color-primary-800);
+  font-weight: var(--fw-semibold);
+}
+
+.timeline-milestone__weeks {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  padding: 1px var(--space-2);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+}
+
+.timeline-milestone__booked {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  color: var(--color-success);
+  padding: 1px var(--space-2);
+  background: #e8f5ee;
+  border-radius: var(--radius-full);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .timeline-countdown {
+    flex-direction: column;
+    text-align: center;
+  }
+}

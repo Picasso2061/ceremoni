@@ -8,22 +8,12 @@ import { useApp } from '../context/AppContext';
 import vendors from '../data/vendors';
 import categories from '../data/categories';
 import Badge from '../components/Badge';
+import EventTimeline from '../components/EventTimeline';
 import './CustomerDashboardPage.css';
 
-const checklist = [
-  { id: 'ck1', label: 'Book a venue', done: true },
-  { id: 'ck2', label: 'Hire a photographer/videographer', done: true },
-  { id: 'ck3', label: 'Arrange catering', done: false },
-  { id: 'ck4', label: 'Select décor & florals', done: false },
-  { id: 'ck5', label: 'Book music/DJ', done: false },
-  { id: 'ck6', label: 'Hire MC/officiant', done: false },
-  { id: 'ck7', label: 'Arrange transportation', done: false },
-  { id: 'ck8', label: 'Finalize attire & styling', done: false },
-];
-
 export default function CustomerDashboardPage() {
-  const { state } = useApp();
-  const { user, bookings, event, favorites } = state;
+  const { state, dispatch } = useApp();
+  const { user, bookings, event, favorites, checklist } = state;
 
   const budgetPercent = Math.round((event.spent / event.budget) * 100);
   const daysUntilEvent = Math.max(0, Math.ceil((new Date(event.date) - new Date()) / (1000 * 60 * 60 * 24)));
@@ -97,6 +87,17 @@ export default function CustomerDashboardPage() {
         <div className="dash-grid">
           {/* ── Main Column ── */}
           <div className="dash-main">
+            {/* Event Timeline */}
+            <div className="dash-card animate-fade-in-up" id="event-timeline-card">
+              <div className="dash-card__header">
+                <h2>
+                  <Calendar size={16} />
+                  Event Timeline
+                </h2>
+              </div>
+              <EventTimeline eventDate={event.date} bookings={bookings} />
+            </div>
+
             {/* Event Overview */}
             <div className="dash-card animate-fade-in-up" id="event-overview">
               <div className="dash-card__header">
@@ -195,7 +196,7 @@ export default function CustomerDashboardPage() {
 
           {/* ── Sidebar ── */}
           <div className="dash-sidebar">
-            {/* Checklist */}
+            {/* Interactive Checklist */}
             <div className="dash-card animate-fade-in-up" id="planning-checklist">
               <div className="dash-card__header">
                 <h2>Planning Checklist</h2>
@@ -211,7 +212,19 @@ export default function CustomerDashboardPage() {
               </div>
               <ul className="dash-checklist">
                 {checklist.map(item => (
-                  <li key={item.id} className={`dash-checklist__item ${item.done ? 'dash-checklist__item--done' : ''}`}>
+                  <li
+                    key={item.id}
+                    className={`dash-checklist__item ${item.done ? 'dash-checklist__item--done' : ''}`}
+                    onClick={() => dispatch({ type: 'TOGGLE_CHECKLIST_ITEM', payload: item.id })}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        dispatch({ type: 'TOGGLE_CHECKLIST_ITEM', payload: item.id });
+                      }
+                    }}
+                  >
                     <div className="dash-checklist__check">
                       {item.done && <CheckCircle2 size={16} />}
                     </div>

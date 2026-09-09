@@ -1,10 +1,13 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import CompareDrawer from './CompareDrawer';
+import CompareModal from './CompareModal';
 
 export default function Layout() {
   const { pathname } = useLocation();
+  const [showCompareModal, setShowCompareModal] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -17,6 +20,11 @@ export default function Layout() {
         <Outlet />
       </main>
       <Footer />
+      <CompareDrawer onCompare={() => setShowCompareModal(true)} />
+      {showCompareModal && (
+        <CompareModal onClose={() => setShowCompareModal(false)} />
+      )}
     </div>
   );
 }
+
