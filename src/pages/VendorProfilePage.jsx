@@ -248,12 +248,12 @@ export default function VendorProfilePage() {
                 <div className="vpp-booking-card__social">
                   {vendor.socialLinks.instagram && (
                     <a href={vendor.socialLinks.instagram} className="vpp-social-link" aria-label="Instagram">
-                      <Instagram size={18} />
+                      <Link2 size={18} />
                     </a>
                   )}
                   {vendor.socialLinks.facebook && (
                     <a href={vendor.socialLinks.facebook} className="vpp-social-link" aria-label="Facebook">
-                      <Facebook size={18} />
+                      <Globe2 size={18} />
                     </a>
                   )}
                   {vendor.socialLinks.website && (
