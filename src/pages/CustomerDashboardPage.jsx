@@ -9,6 +9,7 @@ import vendors from '../data/vendors';
 import categories from '../data/categories';
 import Badge from '../components/Badge';
 import EventTimeline from '../components/EventTimeline';
+import ChatWidget from '../components/ChatWidget';
 import './CustomerDashboardPage.css';
 
 export default function CustomerDashboardPage() {
@@ -267,6 +268,7 @@ export default function CustomerDashboardPage() {
           </div>
         </div>
       </div>
+      <ChatWidget />
     </div>
   );
 }
