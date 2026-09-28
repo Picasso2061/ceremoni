@@ -207,7 +207,7 @@ export default function HomePage() {
               Find Vendors
               <ArrowRight size={18} />
             </Link>
-            <Link to="/register" className="btn btn-outline-light btn-lg">
+            <Link to="/vendor/register" className="btn btn-outline-light btn-lg">
               Join as a Vendor
             </Link>
           </div>

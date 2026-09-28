@@ -217,13 +217,38 @@ function appReducer(state, action) {
         ),
       };
 
-    // ── Role switch ───────────────────────────────────────────
-    case 'SWITCH_ROLE':
+    case 'ADD_INCOMING_REQUEST':
       return {
         ...state,
-        user: { ...state.user, role: action.payload },
+        incomingRequests: [action.payload, ...state.incomingRequests],
       };
 
+    case 'SAVE_VENDOR_REPLY_DRAFT':
+      return {
+        ...state,
+        incomingRequests: state.incomingRequests.map(request =>
+          request.id === action.payload.id
+            ? { ...request, replyDraft: action.payload.replyDraft }
+            : request
+        ),
+      };
+
+    case 'SEND_VENDOR_REPLY':
+      return {
+        ...state,
+        incomingRequests: state.incomingRequests.map(request =>
+          request.id === action.payload.id
+            ? {
+                ...request,
+                replyDraft: action.payload.reply,
+                replySentAt: new Date().toISOString(),
+                status: 'responded',
+              }
+            : request
+        ),
+      };
+
+    // ── Role switch ───────────────────────────────────────────
     default:
       return state;
   }

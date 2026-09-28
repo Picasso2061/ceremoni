@@ -94,7 +94,7 @@ export default function BookingPage() {
             They'll respond within 24-48 hours with a detailed quote.
           </p>
           <div className="bp-success__actions">
-            <Link to="/dashboard" className="btn btn-accent btn-lg">
+            <Link to="/customer" className="btn btn-accent btn-lg">
               View Dashboard
             </Link>
             <Link to="/vendors" className="btn btn-outline btn-lg">

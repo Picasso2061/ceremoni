@@ -16,6 +16,8 @@ dist-ssr
 .env
 .env.*
 !.env.example
+server/data/database.json
+server/data/database.json.tmp
 
 # Editor directories and files
 .vscode/*

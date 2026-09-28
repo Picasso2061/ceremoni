@@ -30,8 +30,8 @@ export default function Footer() {
               <li><Link to="/vendors">Find Vendors</Link></li>
               <li><Link to="/vendors?eventType=wedding">Plan a Wedding</Link></li>
               <li><Link to="/vendors?eventType=burial">Plan a Ceremony</Link></li>
-              <li><Link to="/register">Join as Vendor</Link></li>
-              <li><Link to="/dashboard">My Dashboard</Link></li>
+              <li><Link to="/vendor/register">Join as Vendor</Link></li>
+              <li><Link to="/customer">My Dashboard</Link></li>
             </ul>
           </div>
 

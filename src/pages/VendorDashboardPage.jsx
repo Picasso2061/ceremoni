@@ -1,19 +1,47 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import {
   Eye, Heart, CalendarCheck, Percent,
-  CheckCircle2, XCircle, Clock, Edit3, DollarSign
+  CheckCircle2, XCircle, Clock, Edit3, DollarSign, Sparkles, Send
 } from 'lucide-react';
 import Badge from '../components/Badge';
+import vendors from '../data/vendors';
 import './VendorDashboardPage.css';
 import '../pages/CustomerDashboardPage.css'; // Reuse some layout styles
 
 export default function VendorDashboardPage() {
   const { state, dispatch } = useApp();
   const { user, vendorStats, incomingRequests } = state;
+  const [draftingId, setDraftingId] = useState(null);
+  const [draftError, setDraftError] = useState('');
+  const vendor = vendors.find(item => item.id === user.vendorId);
+  const visibleRequests = incomingRequests.filter(request => !request.vendorId || request.vendorId === user.vendorId);
 
   const handleAccept = (id) => dispatch({ type: 'UPDATE_REQUEST_STATUS', payload: { id, status: 'accepted' } });
   const handleDecline = (id) => dispatch({ type: 'UPDATE_REQUEST_STATUS', payload: { id, status: 'declined' } });
+
+  const draftReply = async (request) => {
+    setDraftingId(request.id);
+    setDraftError('');
+    try {
+      const response = await fetch('/api/concierge/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: `Draft a concise, warm reply to this quote request for ${vendor?.name}. Do not confirm availability, prices, or a booking. Ask for any missing details and invite the customer to continue the conversation. Request: ${JSON.stringify(request)}`,
+          vendors: vendor ? [{ name: vendor.name, location: vendor.location, services: vendor.services }] : [],
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Unable to draft a reply');
+      dispatch({ type: 'SAVE_VENDOR_REPLY_DRAFT', payload: { id: request.id, replyDraft: data.reply } });
+    } catch (error) {
+      setDraftError(error.message || 'Unable to draft a reply right now.');
+    } finally {
+      setDraftingId(null);
+    }
+  };
 
   return (
     <div className="vendor-dashboard-page dashboard-page">
@@ -82,7 +110,7 @@ export default function VendorDashboardPage() {
                 <h2>Incoming Booking Requests</h2>
               </div>
               <div className="vendor-requests-list">
-                {incomingRequests.map(req => (
+                {visibleRequests.map(req => (
                   <div key={req.id} className="vendor-request-item">
                     <div className="vendor-request-item__header">
                       <div>
@@ -112,13 +140,33 @@ export default function VendorDashboardPage() {
                         <button className="btn btn-outline btn-sm" onClick={() => handleDecline(req.id)}>
                           Decline
                         </button>
+                        <button className="btn btn-outline btn-sm" onClick={() => draftReply(req)} disabled={draftingId === req.id}>
+                          <Sparkles size={14} /> {draftingId === req.id ? 'Drafting…' : 'Draft with Ceri'}
+                        </button>
                         <button className="btn btn-primary btn-sm" onClick={() => handleAccept(req.id)}>
                           Accept Request
                         </button>
                       </div>
                     )}
+                    {req.replyDraft && (
+                      <div className="vendor-reply-draft">
+                        <label htmlFor={`reply-${req.id}`}>Ceri draft — review and edit before sending</label>
+                        <textarea
+                          id={`reply-${req.id}`}
+                          value={req.replyDraft}
+                          onChange={(event) => dispatch({ type: 'SAVE_VENDOR_REPLY_DRAFT', payload: { id: req.id, replyDraft: event.target.value } })}
+                          rows="4"
+                        />
+                        {!req.replySentAt ? (
+                          <button className="btn btn-primary btn-sm" onClick={() => dispatch({ type: 'SEND_VENDOR_REPLY', payload: { id: req.id, reply: req.replyDraft } })}>
+                            <Send size={14} /> Approve & send reply
+                          </button>
+                        ) : <p className="vendor-reply-draft__sent">Reply sent after vendor approval.</p>}
+                      </div>
+                    )}
                   </div>
                 ))}
+                {draftError && <p className="vendor-reply-draft__error">{draftError}</p>}
               </div>
             </div>
           </div>

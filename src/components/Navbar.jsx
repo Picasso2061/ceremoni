@@ -1,16 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Search, Heart, User, ChevronDown } from 'lucide-react';
-import { useApp } from '../context/AppContext';
+import { Menu, X, Search, Heart } from 'lucide-react';
 import './Navbar.css';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const { state, dispatch } = useApp();
-  const { user } = state;
-  const isVendor = user.role === 'vendor';
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -28,7 +24,7 @@ export default function Navbar() {
   const links = [
     { to: '/', label: 'Home' },
     { to: '/vendors', label: 'Find Vendors' },
-    { to: isVendor ? '/vendor-dashboard' : '/dashboard', label: 'Dashboard' },
+    { to: '/customer', label: 'My Event' },
   ];
 
   return (
@@ -57,19 +53,11 @@ export default function Navbar() {
             <Link to="/vendors" className="navbar__action-btn" aria-label="Search vendors">
               <Search size={18} />
             </Link>
-            <Link to="/dashboard" className="navbar__action-btn" aria-label="Favorites">
+            <Link to="/customer" className="navbar__action-btn" aria-label="My event dashboard">
               <Heart size={18} />
             </Link>
-            <button 
-              className="btn btn-outline btn-sm"
-              onClick={() => dispatch({ type: 'SWITCH_ROLE', payload: isVendor ? 'customer' : 'vendor' })}
-              title="Toggle role for demo"
-              style={{ padding: '0 var(--space-2)' }}
-            >
-              {isVendor ? 'Vendor' : 'Customer'} Mode
-            </button>
-            <Link to="/register" className="btn btn-accent btn-sm navbar__cta">
-              Join as Vendor
+            <Link to="/vendor" className="btn btn-accent btn-sm navbar__cta">
+              Vendor Portal
             </Link>
             <button
               className="navbar__hamburger"
@@ -108,8 +96,8 @@ export default function Navbar() {
               </li>
             ))}
             <li>
-              <Link to="/register" className="mobile-menu__link">
-                Join as Vendor
+              <Link to="/vendor" className="mobile-menu__link">
+                Vendor Portal
               </Link>
             </li>
           </ul>

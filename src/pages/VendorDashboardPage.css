@@ -82,6 +82,35 @@
   border-top: 1px dashed var(--color-neutral-200);
 }
 
+.vendor-reply-draft {
+  margin-top: 0.9rem;
+  padding: 0.8rem;
+  border: 1px solid var(--color-primary-100);
+  background: rgba(245, 240, 246, 0.6);
+  border-radius: 10px;
+}
+.vendor-reply-draft label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--color-primary-700);
+}
+.vendor-reply-draft textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  margin-bottom: 0.55rem;
+  padding: 0.6rem;
+  border: 1px solid var(--color-primary-200);
+  border-radius: 8px;
+  font: inherit;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+}
+.vendor-reply-draft__sent { margin: 0; color: #387244; font-size: var(--fs-xs); }
+.vendor-reply-draft__error { color: var(--color-error); font-size: var(--fs-xs); padding: 0.6rem; }
+
 .quick-edit-menu {
   display: flex;
   flex-direction: column;
