@@ -1,7 +1,8 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 import reviewsData from '../data/reviews';
 
 const AppContext = createContext(null);
+const STORAGE_KEY = 'ceremoni-app-state-v1';
 
 const initialChecklist = [
   { id: 'ck1', label: 'Book a venue', done: true },
@@ -254,8 +255,42 @@ function appReducer(state, action) {
   }
 }
 
+function loadInitialState() {
+  // Browser storage is a small persistence layer for the prototype. If it is
+  // unavailable or contains stale/corrupt data, retain the seeded experience.
+  if (typeof window === 'undefined') return initialState;
+
+  try {
+    const savedState = window.localStorage.getItem(STORAGE_KEY);
+    if (!savedState) return initialState;
+
+    const parsedState = JSON.parse(savedState);
+    if (!parsedState || typeof parsedState !== 'object' || Array.isArray(parsedState)) {
+      return initialState;
+    }
+
+    return {
+      ...initialState,
+      ...parsedState,
+      user: { ...initialState.user, ...parsedState.user },
+      event: { ...initialState.event, ...parsedState.event },
+      vendorStats: { ...initialState.vendorStats, ...parsedState.vendorStats },
+    };
+  } catch {
+    return initialState;
+  }
+}
+
 export function AppProvider({ children }) {
-  const [state, dispatch] = useReducer(appReducer, initialState);
+  const [state, dispatch] = useReducer(appReducer, undefined, loadInitialState);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch {
+      // Keep the app usable when storage is blocked or full.
+    }
+  }, [state]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

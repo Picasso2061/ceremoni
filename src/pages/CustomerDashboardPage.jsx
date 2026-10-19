@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import {
   Calendar, DollarSign, Users, CheckCircle2, Clock,
   ArrowRight, Plus, TrendingUp, Heart, ChevronRight,
-  MapPin, AlertCircle
+  MapPin, AlertCircle, Sparkles
 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import vendors from '../data/vendors';
@@ -33,10 +33,16 @@ export default function CustomerDashboardPage() {
               <h1 className="dash-header__title">Welcome back, {user.name.split(' ')[0]}!</h1>
               <p className="dash-header__subtitle">{event.title}</p>
             </div>
-            <Link to="/vendors" className="btn btn-accent">
-              <Plus size={16} />
-              Add Vendor
-            </Link>
+            <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
+              <Link to="/customer/plan" className="btn btn-accent" id="cta-plan-event">
+                <Sparkles size={16} />
+                Plan My Event
+              </Link>
+              <Link to="/vendors" className="btn btn-outline-light">
+                <Plus size={16} />
+                Add Vendor
+              </Link>
+            </div>
           </div>
         </div>
       </section>

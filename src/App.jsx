@@ -8,6 +8,7 @@ import VendorRegisterPage from './pages/VendorRegisterPage';
 import CustomerDashboardPage from './pages/CustomerDashboardPage';
 import BookingPage from './pages/BookingPage';
 import VendorDashboardPage from './pages/VendorDashboardPage';
+import EventPlannerPage from './pages/EventPlannerPage';
 import VendorPortalLayout from './components/VendorPortalLayout';
 import CustomerPortalLayout from './components/CustomerPortalLayout';
 
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/customer" element={<CustomerPortalLayout />}>
             <Route index element={<CustomerDashboardPage />} />
             <Route path="dashboard" element={<Navigate to="/customer" replace />} />
+            <Route path="plan" element={<EventPlannerPage />} />
           </Route>
           <Route path="/vendor" element={<VendorPortalLayout />}>
             <Route index element={<VendorDashboardPage />} />
